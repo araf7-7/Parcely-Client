@@ -1,5 +1,7 @@
 
 import Banner from './Banner/Banner';
+import DeliveryCard from './DeliveryCard/DeliveryCard';
+import FeatureCard from './FeatureCard/FeatureCard';
 
 
 const Home = () => {
@@ -7,6 +9,8 @@ const Home = () => {
         <>
         <div>
             <Banner></Banner>
+            <FeatureCard></FeatureCard>
+            <DeliveryCard></DeliveryCard>
         </div>
         </>
     );
