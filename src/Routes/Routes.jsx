@@ -10,6 +10,8 @@ import Error from "../Error/Error";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
+import AllParcel from "../Dashboard/Admin/AllParcel";
+import AllUser from "../Dashboard/Admin/AllUser";
 
 export const router = createBrowserRouter([
     {
@@ -42,15 +44,15 @@ export const router = createBrowserRouter([
             <Dashboard></Dashboard>
             </PrivateRoute>,
         children: [
-            // {
-            //     path: 'Cart',
-            //     element: <Cart></Cart>
-            // },
-            // // admin paths
-            // {
-            //     path: 'users',
-            //     element: <AllUsers></AllUsers>
-            // }
+            {
+                path: 'allParcel',
+                element: <AllParcel></AllParcel>
+            },
+            {
+                path: 'allUser',
+                element:<AllUser></AllUser>
+            },
+
         ]
     }
 ]);

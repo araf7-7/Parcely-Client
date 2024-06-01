@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
+
+import axios from "axios";
 // import { GoogleAuthProvider } from "firebase/auth/cordova";
 // import { app } from "../firebase/firebase.config";
 
@@ -8,7 +10,6 @@ export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider()
-
 const FirebaseProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -36,11 +37,21 @@ const FirebaseProvider = ({ children }) => {
             displayName: name, photoURL: photo
         });
     }
-
+    //save user
+    const saveUser = async user => {
+        const currentUser = {
+            email: user?.email,
+            role: 'User',
+        }
+        const { data } = await axios.put('http://localhost:5000/users', currentUser)
+        return data
+    }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            console.log('current user', currentUser);
+            if (currentUser) {
+                saveUser(currentUser)
+            }
             setLoading(false);
         });
         return () => {

@@ -38,7 +38,7 @@ const Header = () => {
                         <span>
 
                             <div className="dropdown dropdown-end dropdown-bottom dropdown-hover">
-                                <img src={user?.photoURL} className='w-10 rounded-full ' alt="" />
+                                <img src={user?.photoURL} className='w-10 rounded-full ' alt="User Image" />
                                 <ul tabIndex={0} className="dropdown-content justify-start z-[1] menu  shadow text-black bg-base-100 rounded-box w-40">
                                     <li className='text-xl font-extrabold mb-2'>{user?.displayName}</li>
                                     <Link to='/updateProfile'><li className='text-base mb-2 font-bold hover:text-slate-600'>Update Profile</li></Link>
