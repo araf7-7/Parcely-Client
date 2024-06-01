@@ -17,7 +17,7 @@ const AdminMenu = () => {
                 <MenuItem label='All Users' address='/dashboard/allUser' icon={HiMiniUserGroup}></MenuItem>
             </li>
             <li className="">
-            <MenuItem label='All Delivery Men' address='/dashboard/allDeliveryMane' icon={MdManageAccounts}></MenuItem>
+            <MenuItem label='All Delivery Man' address='/dashboard/allDeliveryMan' icon={MdManageAccounts}></MenuItem>
             </li>
             <li className="">
             <MenuItem label='Statistics' address='/dashboard/statistic' icon={SiStatista}></MenuItem>

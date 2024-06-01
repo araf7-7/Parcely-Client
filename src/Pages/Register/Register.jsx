@@ -15,6 +15,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 
 
+
 const Register = () => {
     const axiosPublic = useAxiosPublic()
     const { googleLogin } = UseAuth()
@@ -29,9 +30,9 @@ const Register = () => {
     const {
         register, handleSubmit, formState: { errors },
     } = useForm()
-    const onSubmit = data => {
-        const { email, password, FullName, image } = data
 
+    const onSubmit = data => {
+        const { email, password, FullName, image, role } = data
         const capital = /[A-Z]/;
         const lower = /[a-z]/;
 
@@ -57,12 +58,14 @@ const Register = () => {
                     .then(() => {
                         const userInfo = {
                             name: FullName,
-                            email: email
-
+                            email: email,
+                            role: role
                         }
                         axiosPublic.put('/users', userInfo)
                             .then(res => {
-                                if (res.data.insertedId) {
+                                console.log(res);
+                                if (res.data._id) {
+                                    console.log('user added to database');
                                     toast.success("Successfully Registered")
                                     navigate(from)
                                 }
@@ -113,6 +116,13 @@ const Register = () => {
                             <input {...register("password", { required: true, })} type="password" name="password" id="password" placeholder="Password" className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-yellow-500" />
                             {errors.password && <span className='text-red-600'>This field is required</span>}
                         </div>
+
+                        <select {...register("role", { required: true })} className="select select-bordered border-black w-full max-w-xs">
+                            <option disabled selected>Pick A Role</option>
+                            <option value="User">User</option>
+                            <option value="Delivery Man">Delivery Man</option>
+                            {errors.role && <span className='text-red-600'>This field is required</span>}
+                        </select>
 
                         <button className="block btn hover:bg-sky-300 w-full p-3 text-center  text-white rounded-lg bg-sky-500">Sign Up</button>
                     </form>

@@ -12,6 +12,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import AllParcel from "../Dashboard/Admin/AllParcel";
 import AllUser from "../Dashboard/Admin/AllUser";
+import BookParcel from "../Dashboard/User/BookParcel";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
             <Dashboard></Dashboard>
             </PrivateRoute>,
         children: [
+            //admin routes
             {
                 path: 'allParcel',
                 element: <AllParcel></AllParcel>
@@ -51,6 +53,23 @@ export const router = createBrowserRouter([
             {
                 path: 'allUser',
                 element:<AllUser></AllUser>
+            },
+            {
+                path: 'allDeliveryMan',
+                element:<AllUser></AllUser>
+            },
+            {
+                path: 'statistic',
+                element:<AllUser></AllUser>
+            },
+            {
+                path: 'menu',
+                element:<AllUser></AllUser>
+            },
+            // user routes
+            {
+                path: 'bookParcel',
+                element:<BookParcel></BookParcel>
             },
 
         ]

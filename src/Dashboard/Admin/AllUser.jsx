@@ -3,7 +3,7 @@
 const AllUser = () => {
     return (
         <div>
-            asdasdasdasdasd
+            
         </div>
     );
 };
