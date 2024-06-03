@@ -13,7 +13,7 @@ const UserMenu = () => {
                 <MenuItem label='My Parcel' address='/dashboard/myParcel' icon={LuPackageCheck}></MenuItem>
             </li>
             <li className="">
-                <MenuItem label='My Profile' address='/' icon={FaRegUser}></MenuItem>
+                <MenuItem label='My Profile' address='/dashboard/myProfile' icon={FaRegUser}></MenuItem>
             </li>
         </div>
     );

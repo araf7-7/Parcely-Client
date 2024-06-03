@@ -13,6 +13,10 @@ import Dashboard from "../Dashboard/Dashboard";
 import AllParcel from "../Dashboard/Admin/AllParcel";
 import AllUser from "../Dashboard/Admin/AllUser";
 import BookParcel from "../Dashboard/User/BookParcel";
+import MyParcel from "../Dashboard/User/MyParcel";
+import UpdateParcel from "../Dashboard/User/UpdateParcel";
+import MyProfile from "../Dashboard/User/MyProfile";
+import UpdateUser from "../Dashboard/User/UpdateUser";
 
 export const router = createBrowserRouter([
     {
@@ -43,7 +47,7 @@ export const router = createBrowserRouter([
         path: 'dashboard',
         element: <PrivateRoute>
             <Dashboard></Dashboard>
-            </PrivateRoute>,
+        </PrivateRoute>,
         children: [
             //admin routes
             {
@@ -52,24 +56,41 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'allUser',
-                element:<AllUser></AllUser>
+                element: <AllUser></AllUser>
             },
             {
                 path: 'allDeliveryMan',
-                element:<AllUser></AllUser>
+                element: <AllUser></AllUser>
             },
             {
                 path: 'statistic',
-                element:<AllUser></AllUser>
+                element: <AllUser></AllUser>
             },
             {
                 path: 'menu',
-                element:<AllUser></AllUser>
+                element: <AllUser></AllUser>
             },
             // user routes
             {
                 path: 'bookParcel',
-                element:<BookParcel></BookParcel>
+                element: <BookParcel></BookParcel>
+            },
+            {
+                path: 'myParcel',
+                element: <MyParcel></MyParcel>
+            },
+            {
+                path: 'myProfile',
+                element: <MyProfile></MyProfile>
+            },
+            {
+                path: 'updateUser',
+                element: <UpdateUser></UpdateUser>
+            },
+            {
+                path: 'updateParcel/:id',
+                element: <UpdateParcel></UpdateParcel>,
+                loader: ({ params }) => fetch(`http://localhost:5000/parcel/g/${params.id}`)
             },
 
         ]

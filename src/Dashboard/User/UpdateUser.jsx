@@ -1,15 +1,18 @@
 
+
 import { Helmet } from 'react-helmet';
 
 import UseAuth from '../../hooks/useAuth';
 import { getAuth, updateProfile } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 
 
-const UpdateProfile = () => {
+
+const UpdateUser = () => {
     const { user, setUser } = UseAuth()
-
+    const navigate = useNavigate()
     const handleUpdate = async (e) => {
         e.preventDefault()
         const form = e.target
@@ -23,17 +26,18 @@ const UpdateProfile = () => {
                 photoURL: image,
                 displayName: userName
             })
-      
+
             let userReplica = {
                 ...user
             }
             userReplica.displayName = userName
             userReplica.photoURL = image
             setUser(userReplica)
-
+            
             toast.dismiss(toastId)
-            toast.success("Name and Image updated")
+            toast.error("Try Again")
         } catch {
+            navigate('/dashboard/myProfile')
             toast.dismiss(toastId)
             toast.success("Name and Image updated")
 
@@ -47,7 +51,7 @@ const UpdateProfile = () => {
             </Helmet>
             <div
                 className="w-full max-w-md p-8 border-2 space-y-5 rounded-xl dark:text-black  mt-24 mx-auto ">
-                <h1 className="text-3xl font-bold text-center">Update Now!</h1>
+                <h1 className="text-3xl font-bold text-center">Update Profile</h1>
                 <form onSubmit={handleUpdate} className="space-y-8 pt-5 ">
 
                     <div>
@@ -94,7 +98,7 @@ const UpdateProfile = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="w-full px-8 py-3 rounded-full bg-gradient-to-r bg-yellow-800 font-semibold border-2 dark:text-gray-50">Update Profile</button>
+                                className="w-full px-8 py-3 rounded-full bg-gradient-to-r bg-sky-400 hover:bg-sky-300 font-semibold border-2 dark:text-gray-50">Update Profile</button>
                         </div>
                     </div>
                 </form>
@@ -103,4 +107,4 @@ const UpdateProfile = () => {
     );
 };
 
-export default UpdateProfile;
+export default UpdateUser;

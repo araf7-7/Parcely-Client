@@ -1,18 +1,20 @@
-import { useForm } from "react-hook-form";
-import UseAuth from "../../hooks/useAuth";
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-// import useAxiosPublic from "../../hooks/useAxiosPublic";
+import UseAuth from "../../hooks/useAuth";
 
 
-const BookParcel = () => {
+
+
+const UpdateParcel = () => {
+    const { phoneNumber, parcelType, _id, Weight, receiverName, receiverNo, address, latitude, longitude, price } = useLoaderData()
+
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure()
-    const { register, handleSubmit, watch, setValue, reset } = useForm();
-    const [startDate, setStartDate] = useState(new Date());
+    const { register, handleSubmit, watch, setValue,  } = useForm();
+
     const weight = watch("Weight");
 
     useEffect(() => {
@@ -28,20 +30,13 @@ const BookParcel = () => {
             setValue("price", price);
         }
     }, [weight, setValue]);
-
     const onSubmit = async (data) => {
         data.Weight = parseFloat(data.Weight);
         data.receiverNo = parseFloat(data.receiverNo);
         data.latitude = parseFloat(data.latitude);
         data.longitude = parseFloat(data.longitude);
         data.price = parseFloat(data.price)
-        const formattedDate = startDate.toISOString().split('T')[0];
-        data.deliveryDate = formattedDate;
-        const months = [
-            "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-        ];
-        const bookingDate = new Date();
-        const formattedBookingDate = `${months[bookingDate.getMonth()]} ${String(bookingDate.getDate()).padStart(2, '0')}`;
+
         const menuItem = {
             name: data.name,
             email: data.email,
@@ -54,17 +49,15 @@ const BookParcel = () => {
             latitude: data.latitude,
             longitude: data.longitude,
             price: data.price,
-            deliveryDate: data.deliveryDate,
-            status: 'pending',
-            bookingDate: formattedBookingDate
+
         }
         try {
-            const parcelRes = await axiosSecure.post('/parcel', menuItem);
-            if (parcelRes.data.insertedId) {
-                reset()
-                toast.success('Parcel Added Successfully');
+            const parcelRes = await axiosSecure.patch(`/parcel/${_id}`, menuItem);
+            if (parcelRes.data.modifiedCount > 0) {
+                // reset()
+                toast.success('Parcel Updated  Successfully');
             } else {
-                toast.error('Failed to add parcel');
+                toast.error('Failed to Update Parcel');
             }
         } catch (error) {
             console.error(error);
@@ -74,10 +67,11 @@ const BookParcel = () => {
 
     };
 
+
     return (
         <div>
             <div>
-                <h1 className="text-center mt-5 font-abc text-4xl" >Book A Parcel</h1>
+                <h1 className="text-center mt-5 font-abc text-4xl" >Update A Parcel</h1>
             </div>
             <div className="my-10 bg-sky-100 p-20 rounded-2xl mx-10">
                 <form onSubmit={handleSubmit(onSubmit)} className="max-w-md mx-auto">
@@ -121,6 +115,8 @@ const BookParcel = () => {
                         <input
                             type="number"
                             // Allows for float values
+                            defaultValue={phoneNumber}
+                            readOnly
                             {...register("phoneNumber", { valueAsNumber: true })}
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
@@ -141,6 +137,7 @@ const BookParcel = () => {
                                 id="parcelType"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
+                                defaultValue={parcelType}
                                 required
                                 {...register("parcelType")}
                             />
@@ -157,6 +154,7 @@ const BookParcel = () => {
                                 // Allows for float values
                                 name="Weight"
                                 id="Weight"
+                                defaultValue={Weight}
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
                                 required
@@ -176,6 +174,7 @@ const BookParcel = () => {
                                 type="text"
                                 name="receiverName"
                                 id="receiverName"
+                                defaultValue={receiverName}
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
                                 required
@@ -193,6 +192,7 @@ const BookParcel = () => {
                                 type="number"
                                 // Allows for float values
                                 name="receiverNo"
+                                defaultValue={receiverNo}
                                 id="receiverNo"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
@@ -211,6 +211,7 @@ const BookParcel = () => {
                         <input
                             type="text"
                             id="address"
+                            defaultValue={address}
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                             placeholder=" "
                             required
@@ -228,6 +229,7 @@ const BookParcel = () => {
                         <div className="relative z-0 w-full mb-5 group">
                             <input
                                 type="number"
+                                defaultValue={latitude}
                                 step="0.01"// Allows for float values
                                 name="latitude"
                                 id="latitude"
@@ -248,6 +250,7 @@ const BookParcel = () => {
                                 type="number"
                                 step="0.01" // Allows for float values
                                 name="longitude"
+                                defaultValue={longitude}
                                 id="longitude"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                 placeholder=" "
@@ -265,6 +268,7 @@ const BookParcel = () => {
                     <div className="relative z-0 w-full mb-5 group">
                         <input
                             type="number"
+                            defaultValue={price}
                             // Allows for float values
                             name="price"
                             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -279,28 +283,12 @@ const BookParcel = () => {
                             Price
                         </label>
                     </div>
-                    <div className="relative z-0 w-full mb-5 group">
-                        <label
-                            htmlFor="floating_deliveryDate"
-                            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-                        >
-                            Delivery Date
-                        </label>
-                        <ReactDatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                            placeholderText="Select Delivery Date"
-                            dateFormat="yyyy-MM-dd"
-                            required
-                        />
 
-                    </div>
                     <button
                         type="submit"
                         className="text-white btn btn-block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm   px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
-                        Submit
+                        Update
                     </button>
                 </form>
             </div>
@@ -308,4 +296,4 @@ const BookParcel = () => {
     );
 };
 
-export default BookParcel;
+export default UpdateParcel;

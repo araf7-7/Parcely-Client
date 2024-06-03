@@ -9,6 +9,7 @@ import DeliveryItem from "./MenuItem/DeliveryItem";
 
 const Dashboard = () => {
     const [role, isLoading] = useRole()
+
     console.log(role, isLoading);
     return (
         <div className="flex">

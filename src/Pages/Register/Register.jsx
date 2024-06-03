@@ -61,6 +61,7 @@ const Register = () => {
                             email: email,
                             role: role
                         }
+                        console.log(role);
                         axiosPublic.put('/users', userInfo)
                             .then(res => {
                                 console.log(res);
@@ -117,12 +118,12 @@ const Register = () => {
                             {errors.password && <span className='text-red-600'>This field is required</span>}
                         </div>
 
-                        <select {...register("role", { required: true })} className="select select-bordered border-black w-full max-w-xs">
+                        {/* <select {...register("role", { required: true })} className="select select-bordered border-black w-full max-w-xs">
                             <option disabled selected>Pick A Role</option>
                             <option value="User">User</option>
                             <option value="Delivery Man">Delivery Man</option>
                             {errors.role && <span className='text-red-600'>This field is required</span>}
-                        </select>
+                        </select> */}
 
                         <button className="block btn hover:bg-sky-300 w-full p-3 text-center  text-white rounded-lg bg-sky-500">Sign Up</button>
                     </form>
