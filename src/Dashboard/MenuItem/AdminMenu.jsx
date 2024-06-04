@@ -1,8 +1,6 @@
 import { SiStatista } from "react-icons/si";
-
 import { HiMiniUserGroup } from "react-icons/hi2";
 import { MdManageAccounts } from "react-icons/md";
-import { RiMenuSearchLine } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import MenuItem from "./MenuItem";
 
@@ -21,9 +19,6 @@ const AdminMenu = () => {
             </li>
             <li className="">
             <MenuItem label='Statistics' address='/dashboard/statistic' icon={SiStatista}></MenuItem>
-            </li>
-            <li className="">
-            <MenuItem label='Menu' address='/dashboard/menu' icon={RiMenuSearchLine}></MenuItem>
             </li>
         </div>
     );

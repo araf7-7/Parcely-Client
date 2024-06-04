@@ -16,6 +16,14 @@ const AllParcel = () => {
             return res.data;
         },
     });
+
+    const { data: delivery = [] } = useQuery({
+        queryKey: ['delivery'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/users/u/delivery`);
+            return data;
+        },
+    });
     const openModal = () => {
         setShowModal(true);
     };
@@ -74,19 +82,22 @@ const AllParcel = () => {
                                 <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
                                 <select id="deliveryMan" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option selected>Choose a Delivery Man</option>
-                                    <option value="US">United States</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="FR">France</option>
-                                    <option value="DE">Germany</option>
+                                    {
+                                        delivery.map((man) => (
+                                            <option key={man._id} value={man._id}>
+                                                {man.name}
+                                            </option>
+                                        ))
+                                    }
                                 </select>
                             </form>
                             <div className="grid mt-5">
-                            <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Approximate Date</label>
-                            <ReactDatePicker className="rounded-xl border-0" selected={startDate} onChange={(date) => setStartDate(date)} />
+                                <label htmlFor="" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Approximate Date</label>
+                                <ReactDatePicker className="rounded-xl border-0" selected={startDate} onChange={(date) => setStartDate(date)} />
                             </div>
                             <button className="btn bg-sky-400 border-0 btn-block mt-4">Assign</button>
                         </div>
-                        
+
                     </form>
                 </div>
             }

@@ -17,6 +17,9 @@ import MyParcel from "../Dashboard/User/MyParcel";
 import UpdateParcel from "../Dashboard/User/UpdateParcel";
 import MyProfile from "../Dashboard/User/MyProfile";
 import UpdateUser from "../Dashboard/User/UpdateUser";
+import DeliveryList from "../Dashboard/DeliveryMan/DeliveryList";
+import Reviews from "../Dashboard/DeliveryMan/Reviews";
+import AllDeliveryMan from "../Dashboard/Admin/AllDeliveryMan";
 
 export const router = createBrowserRouter([
     {
@@ -60,14 +63,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'allDeliveryMan',
-                element: <AllUser></AllUser>
+                element: <AllDeliveryMan/>
             },
             {
                 path: 'statistic',
-                element: <AllUser></AllUser>
-            },
-            {
-                path: 'menu',
                 element: <AllUser></AllUser>
             },
             // user routes
@@ -92,6 +91,16 @@ export const router = createBrowserRouter([
                 element: <UpdateParcel></UpdateParcel>,
                 loader: ({ params }) => fetch(`http://localhost:5000/parcel/g/${params.id}`)
             },
+
+            //delivery route
+            {
+                path: 'deliveryList',
+                element: <DeliveryList></DeliveryList>
+            },
+            {
+                path: 'reviews',
+                element: <Reviews></Reviews>
+            }
 
         ]
     }

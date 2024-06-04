@@ -24,7 +24,7 @@ const AllUser = () => {
             return res.data;
         },
     });
-
+ 
     const handleMakeDelivery = (user) => {
         axiosSecure.patch(`/users/deliveryMan/${user._id}`)
             .then(res => {
@@ -73,6 +73,9 @@ const AllUser = () => {
                                         <th scope='col' className='px-5 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-base font-abc uppercase font-normal'>
                                             Email
                                         </th>
+                                        <th scope='col' className='px-5 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-base font-abc uppercase font-normal'>
+                                           Phone Number
+                                        </th>
                                         <th scope='col' className='px-2 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-base font-abc uppercase font-normal'>
                                             Parcel Booked
                                         </th>
@@ -95,6 +98,9 @@ const AllUser = () => {
                                             </td>
                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-base font-abc'>
                                                 <p className='text-gray-900 whitespace-no-wrap'>{user?.email}</p>
+                                            </td>
+                                            <td className='px-5 py-5 border-b border-gray-200 bg-white text-base font-abc'>
+                                                <p className='text-gray-900 whitespace-no-wrap'>{user?.phoneNumber}</p>
                                             </td>
                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-base font-abc'>
                                                 <p className='text-gray-900 whitespace-no-wrap'>{getParcelCountByUser(user?.email)}</p>

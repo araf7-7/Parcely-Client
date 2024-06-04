@@ -38,14 +38,15 @@ const FirebaseProvider = ({ children }) => {
         });
     }
     //save user
-    const saveUser = async user => {
+    async function  saveUser (user)  {
         const currentUser = {
             email: user?.email,
-            role: 'User'
-        }
-        // console.log(user?.displayName , 'askljdlaksjdalk');
-        const { data } = await axios.put('http://localhost:5000/users', currentUser)
-        return data
+            name: user?.FullName,
+            phoneNumber: user?.phoneNumber,
+            role: 'User',
+        };
+        const { data } = await axios.put(`http://localhost:5000/users`, currentUser); // Corrected URL
+        return data;
     }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -67,7 +68,8 @@ const FirebaseProvider = ({ children }) => {
         signIn,
         logOut,
         updateUserProfile,
-        googleLogin
+        googleLogin,
+        saveUser
     }
 
     return (

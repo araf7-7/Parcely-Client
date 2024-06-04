@@ -19,7 +19,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 const Register = () => {
     const axiosPublic = useAxiosPublic()
     const { googleLogin } = UseAuth()
-    const { createUser, user, updateUserProfile } = UseAuth();
+    const { createUser, user, updateUserProfile, saveUser } = UseAuth();
     const navigate = useNavigate()
     useEffect(() => {
         if (user?.photoURL) navigate("/")
@@ -32,7 +32,7 @@ const Register = () => {
     } = useForm()
 
     const onSubmit = data => {
-        const { email, password, FullName, image } = data
+        const { email, password, FullName, image, phoneNumber } = data
         const capital = /[A-Z]/;
         const lower = /[a-z]/;
 
@@ -52,7 +52,6 @@ const Register = () => {
             })
         }
         createUser(email, password)
-
             .then(() => {
                 updateUserProfile(FullName, image)
                     .then(() => {
@@ -77,7 +76,9 @@ const Register = () => {
             })
 
             .catch(() => toast.error("Please Check Your Email"))
+            saveUser({ FullName,  phoneNumber, email, role: "User" })
     }
+    
     const handleSocialLogin = socialProvider => {
         socialProvider().then(result => {
             if (result.user) {
@@ -106,6 +107,11 @@ const Register = () => {
                             <label htmlFor="email" className="block dark:text-gray-600">Email</label>
                             <input {...register("email", { required: true })} type="email" name="email" id="email" placeholder="Email" className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-yellow-500" />
                             {errors.email && <span className='text-red-600'>This field is required</span>}
+                        </div>
+                        <div className="space-y-1 text-sm">
+                            <label htmlFor="number" className="block dark:text-gray-600">Email</label>
+                            <input {...register("phoneNumber", { required: true })} type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-yellow-500" />
+                            {errors.phoneNumber && <span className='text-red-600'>This field is required</span>}
                         </div>
 
                         <div className="space-y-1 text-sm">
