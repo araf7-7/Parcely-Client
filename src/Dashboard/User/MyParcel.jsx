@@ -88,10 +88,10 @@ const MyParcel = () => {
                                             <p></p>
                                         </td>
                                         <td className="p-3">
-                                            <p></p>
+                                            <p>{parcel.bookingDate}</p>
                                         </td>
                                         <td className="p-3">
-                                            <p>{parcel.bookingDate}</p>
+                                            
                                         </td>
                                         <td className="p-3">
                                             <span className="px-3 py-1 w-30 bg-green-400 font-semibold rounded-md">

@@ -41,8 +41,9 @@ const FirebaseProvider = ({ children }) => {
     const saveUser = async user => {
         const currentUser = {
             email: user?.email,
-            role : 'User'
+            role: 'User'
         }
+        // console.log(user?.displayName , 'askljdlaksjdalk');
         const { data } = await axios.put('http://localhost:5000/users', currentUser)
         return data
     }

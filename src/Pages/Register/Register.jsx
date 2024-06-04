@@ -32,7 +32,7 @@ const Register = () => {
     } = useForm()
 
     const onSubmit = data => {
-        const { email, password, FullName, image, role } = data
+        const { email, password, FullName, image } = data
         const capital = /[A-Z]/;
         const lower = /[a-z]/;
 
@@ -59,9 +59,8 @@ const Register = () => {
                         const userInfo = {
                             name: FullName,
                             email: email,
-                            role: role
                         }
-                        console.log(role);
+
                         axiosPublic.put('/users', userInfo)
                             .then(res => {
                                 console.log(res);
@@ -74,7 +73,9 @@ const Register = () => {
 
 
                     })
+
             })
+
             .catch(() => toast.error("Please Check Your Email"))
     }
     const handleSocialLogin = socialProvider => {
