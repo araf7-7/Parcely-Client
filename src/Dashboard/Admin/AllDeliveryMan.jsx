@@ -11,6 +11,7 @@ const AllDeliveryMan = () => {
             return data;
         },
     });
+    console.log(users);
     return (
         <div className="mx-10">
             <div>

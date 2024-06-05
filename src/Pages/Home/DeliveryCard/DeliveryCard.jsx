@@ -1,35 +1,29 @@
-import { Card } from "flowbite-react";
-import { FaBoxOpen } from "react-icons/fa";
+import { useQuery } from "@tanstack/react-query";
 
-import { IoStarSharp } from "react-icons/io5";
+
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Cards from "./Cards";
 
 const DeliveryCard = () => {
+    const axiosSecure = useAxiosSecure()
+    const { data: users = [] } = useQuery({
+        queryKey: ['usersDelivery'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/users/u/delivery`);
+            return data;
+        },
+    });
+    console.log(users);
     return (
-        <div>
-            <Card
-                className="max-w-[300px] "
-                imgAlt="Meaningful alt text for an image that is not purely decorative"
-                imgSrc="https://media.istockphoto.com/id/918839040/photo/delivery-guy.jpg?s=612x612&w=0&k=20&c=qYh6-ZhLfmbQyRMFpyAC3St7FCQuWu9wUuTzRYAFLz4="
+        <>
+            <div>
+                <h1 className="text-5xl font-abc mt-32 mb-5 text-center">Top Delivery Man</h1>
+            </div>
+            <div className=" container mb-32 mx-auto grid grid-cols-3 gap-3">
+                {users?.slice(0, 3).map(user => <Cards key={user._id} user={user}>
 
-            >
-                <h5 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-                   Shihab
-                </h5>
-                <h5 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-                    <div className="flex gap-2 items-center">
-                        <FaBoxOpen /> Parcel Delivered :
-                        <h1>100</h1>
-                    </div>
-                </h5>
-                <h5 className="text-xl font-medium tracking-tight text-gray-900 dark:text-white">
-                    <div className="flex gap-2 items-center">
-                    <IoStarSharp className="text-yellow-400" /> Rating :
-                        <h1>100</h1>
-                    </div>
-                </h5>
-
-            </Card>
-        </div>
+                </Cards>)}
+            </div></>
     );
 };
 

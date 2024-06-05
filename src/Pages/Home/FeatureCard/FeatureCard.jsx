@@ -7,6 +7,7 @@ import { IoIosTimer } from "react-icons/io";
 const FeatureCard = () => {
     return (
         <>
+          
             <div className="grid grid-cols-1 my-[130px] md:grid-cols-2 lg:grid-cols-3 gap-5 container mx-auto items-center justify-center">
                 <div className="shadow-2xl">
                     <div className="flex w-auto h-52 items-center">
