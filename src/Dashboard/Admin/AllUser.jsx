@@ -3,12 +3,14 @@ import useAxiosSecure from './../../hooks/useAxiosSecure';
 import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { FaUser } from "react-icons/fa6";
+import { useState } from "react";
 
 
 const AllUser = () => {
 
     const axiosSecure = useAxiosSecure();
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 5;
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -24,7 +26,7 @@ const AllUser = () => {
             return res.data;
         },
     });
- 
+
     const handleMakeDelivery = (user) => {
         axiosSecure.patch(`/users/deliveryMan/${user._id}`)
             .then(res => {
@@ -48,6 +50,17 @@ const AllUser = () => {
     const getParcelCountByUser = (email) => {
         return parcels.filter(parcel => parcel.email === email).length;
     };
+    // Pagination logic
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+    const totalPages = Math.ceil(users.length / usersPerPage);
+
+    const handleClick = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
 
     return (
         <div>
@@ -74,7 +87,7 @@ const AllUser = () => {
                                             Email
                                         </th>
                                         <th scope='col' className='px-5 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-base font-abc uppercase font-normal'>
-                                           Phone Number
+                                            Phone Number
                                         </th>
                                         <th scope='col' className='px-2 py-3 bg-white border-b border-gray-200 text-gray-800 text-left text-base font-abc uppercase font-normal'>
                                             Parcel Booked
@@ -91,7 +104,7 @@ const AllUser = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {users.map((user) => (
+                                    {currentUsers.map((user) => (
                                         <tr key={user._id}>
                                             <td className='px-5 py-5 border-b border-gray-200 bg-white text-base font-abc'>
                                                 <p className='text-gray-900 whitespace-no-wrap'>{user?.name}</p>
@@ -126,6 +139,17 @@ const AllUser = () => {
                                     ))}
                                 </tbody>
                             </table>
+                        </div>
+                        <div className="flex justify-center mt-5">
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <button
+                                    key={index + 1}
+                                    onClick={() => handleClick(index + 1)}
+                                    className={`btn mx-1 hover:bg-[black] hover:text-white ${currentPage === index + 1 ? 'btn-active hover:bg-[#D1A054] hover:text-white' : ''}`}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
                         </div>
                     </div>
                 </div>
