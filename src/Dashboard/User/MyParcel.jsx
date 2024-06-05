@@ -3,22 +3,23 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import UseAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { RiDeleteBin2Fill } from "react-icons/ri";
-
 import { Link } from "react-router-dom";
 import { GrUpdate } from "react-icons/gr";
-
+import { FiStar } from "react-icons/fi";
+import { MdPayment } from "react-icons/md";
 
 const MyParcel = () => {
-    const axiosSecure = useAxiosSecure()
-    const { user } = UseAuth()
+    const axiosSecure = useAxiosSecure();
+    const { user } = UseAuth();
     const { data: parcel = [], refetch } = useQuery({
         queryKey: ['parcels'],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/parcel/${user.email}`)
-            return res.data
+            const res = await axiosSecure.get(`/parcel/${user.email}`);
+            return res.data;
         }
-    })
-    const handleDeleteParcel = parcels => {
+    });
+
+    const handleDeleteParcel = (parcels) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -29,27 +30,34 @@ const MyParcel = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-
                 axiosSecure.delete(`/parcel/${parcels._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
-                            refetch()
+                            refetch();
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
                         }
-                    })
+                    });
             }
         });
-    }
+    };
+
+    const formatDate = (dateString) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB'); // Format: dd/mm/yyyy
+    };
 
     return (
-        <div>
+        <div className="m-5">
+            <div>
+                <h1 className="text-4xl my-10 text-center "> My Parcels </h1>
+            </div>
             {parcel.length > 0 ? (
                 <div className="container p-2 mx-auto sm:p-4 dark:text-gray-800">
-
                     <div className="overflow-x-auto">
                         <table className="min-w-full text-xs">
                             <colgroup>
@@ -67,7 +75,7 @@ const MyParcel = () => {
                                     <th className="p-3">Approximate Delivery Date</th>
                                     <th className="p-3">Booking Date</th>
                                     <th className="p-3">Delivery Men ID</th>
-                                    <th className="p-3 pl-7">Status</th>
+                                    <th className="p-3">Status</th>
                                     <th className="p-3">Delete</th>
                                     <th className="p-3">Update</th>
                                     <th className="p-3">Review</th>
@@ -75,44 +83,36 @@ const MyParcel = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {parcel.map((parcel) =>
+                                {parcel.map((parcel) => (
                                     <tr key={parcel._id}>
-
-                                        <td className="p-3 uppercase">
-                                            {parcel.parcelType}
-                                        </td>
-                                        <td className="p-3">
-                                            <p>{parcel.deliveryDate}</p>
-                                        </td>
-                                        <td className="p-3">
-                                            <p></p>
-                                        </td>
-                                        <td className="p-3">
-                                            <p>{parcel.bookingDate}</p>
-                                        </td>
-                                        <td className="p-3">
-                                            
-                                        </td>
-                                        <td className="p-3">
-                                            <span className="px-3 py-1 w-30 bg-green-400 font-semibold rounded-md">
-                                                <span>{parcel.status}</span>
-                                            </span>
+                                        <td className="p-3 uppercase">{parcel.parcelType}</td>
+                                        <td className="p-3">{formatDate(parcel.deliveryDate)}</td>
+                                        <td className="p-3">{formatDate(parcel.approximateDate)}</td>
+                                        <td className="p-3">{parcel.bookingDate}</td>
+                                        <td className="p-3">{parcel.deliveryManId}</td>
+                                        <td className="p-3 ml-4">
+                                            <span className="font-bold rounded-md">{parcel.status}</span>
                                         </td>
                                         <td>
-                                            <button
-                                                onClick={() => handleDeleteParcel(parcel)} className="btn text-white bg-red-600"><RiDeleteBin2Fill></RiDeleteBin2Fill>
+                                            <button onClick={() => handleDeleteParcel(parcel)} disabled={parcel.status === 'On The Way'} className="btn text-white bg-red-600">
+                                                <RiDeleteBin2Fill />
                                             </button>
                                         </td>
                                         <td>
                                             <Link to={`/dashboard/updateParcel/${parcel._id}`}>
-                                                <button className="btn ml-2 bg-blue-600 text-white ">
+                                                <button className={`btn ml-2 ${parcel.status === 'On The Way' ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white'}`} disabled={parcel.status === 'On The Way'}>
                                                     <GrUpdate />
                                                 </button>
                                             </Link>
                                         </td>
-                                    </tr>)
-                                }
-
+                                        <td>
+                                            <button className="btn ml-2 bg-yellow-400"><FiStar/></button>
+                                        </td>
+                                        <td>
+                                            <button className="btn ml-2 bg-orange-500"><MdPayment /></button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
@@ -123,7 +123,6 @@ const MyParcel = () => {
                     <img className="w-[500px] flex items-center justify-center container mx-auto" src="https://www.nuwire.co/img/undraw_cost.svg" alt="No Parcel" />
                 </div>
             )}
-
         </div>
     );
 };

@@ -61,7 +61,7 @@ const UpdateParcel = () => {
             }
         } catch (error) {
             console.error(error);
-            toast.error('An error occurred while adding the parcel');
+            toast.error('An error occurred while Updating the parcel');
         }
         // Parse numeric values
 

@@ -12,8 +12,8 @@ const Dashboard = () => {
 
     console.log(role, isLoading);
     return (
-        <div className="flex">
-            <div className="w-[356px] min-h-screen bg-sky-200">
+        <div className="lg:flex grid grid-cols-1 ">
+            <div className="lg:w-[356px] w-full min-h-screen bg-sky-200">
                 <ul className="menu p-4 text-lg font-abc text-black">
                     {role === 'Admin' && <AdminMenu></AdminMenu> }
                     {role === 'User' && <UserMenu></UserMenu>}
