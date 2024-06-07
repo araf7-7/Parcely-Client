@@ -8,14 +8,14 @@ import UserMenu from "./MenuItem/UserMenu";
 import DeliveryItem from "./MenuItem/DeliveryItem";
 
 const Dashboard = () => {
-    const [role, isLoading] = useRole()
+    const [role] = useRole()
 
-    console.log(role, isLoading);
+
     return (
         <div className="lg:flex grid grid-cols-1 ">
             <div className="lg:w-[356px] w-full min-h-screen bg-sky-200">
                 <ul className="menu p-4 text-lg font-abc text-black">
-                    {role === 'Admin' && <AdminMenu></AdminMenu> }
+                    {role === 'Admin' && <AdminMenu></AdminMenu>}
                     {role === 'User' && <UserMenu></UserMenu>}
                     {role === 'Delivery Man' && <DeliveryItem></DeliveryItem>}
                     <div className="divider"></div>

@@ -1,19 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { MdDirectionsBike } from "react-icons/md";
+import { Helmet } from "react-helmet";
 
 const AllDeliveryMan = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: users = [] } = useQuery({
-        queryKey: ['users'],
+    const { data: delivery = [] } = useQuery({
+        queryKey: ['delivery'],
         queryFn: async () => {
             const { data } = await axiosSecure.get(`/users/u/delivery`);
             return data;
         },
     });
-    console.log(users);
+    const { data: parcels = [] } = useQuery({
+        queryKey: ['parcel'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/parcel`);
+            return data;
+        },
+    });
+    // Calculate the number of delivered parcels for each delivery man
+    const deliveredCounts = delivery.map(deliver => {
+        const count = parcels.filter(parcel => parcel.status === 'Delivered' && parcel.deliveryManId === deliver._id).length;
+        return { ...deliver, deliveredCount: count };
+    });
     return (
         <div className="mx-10">
+            <Helmet>
+                <title>All Delivery Man</title>
+            </Helmet>
             <div>
                 <h1 className="text-4xl my-10 flex gap-2 items-center"> <MdDirectionsBike /> All Delivery Man</h1>
             </div>
@@ -31,15 +46,15 @@ const AllDeliveryMan = () => {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => <tr key={user._id} className="bg-sky-200">
-                                <th>{index + 1}</th>
-                                <td>{user.name}</td>
-                                <td>{user.phoneNumber}</td>
-                                <td></td>
-                                <td></td>
-                            </tr>)
+                            deliveredCounts.map((deliver, index) =>
+                                <tr key={deliver._id}>
+                                    <th>{index + 1}</th>
+                                    <td>{deliver.name}</td>
+                                    <td>{deliver.phoneNumber}</td>
+                                    <td>{deliver.deliveredCount}</td>
+                                </tr>
+                            )
                         }
-
                     </tbody>
                 </table>
 

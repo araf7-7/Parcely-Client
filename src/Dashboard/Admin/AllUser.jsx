@@ -14,7 +14,7 @@ const AllUser = () => {
     const { data: users = [], refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/users`);
+            const { data } = await axiosSecure.get(`/users`)
             return data;
         },
     });
@@ -66,7 +66,7 @@ const AllUser = () => {
         <div>
             <div className='container mx-auto px-4 sm:px-8'>
                 <Helmet>
-                    <title>Manage Users</title>
+                    <title>All Users</title>
                 </Helmet>
                 <div className='py-8'>
                     <div className="">

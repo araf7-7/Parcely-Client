@@ -59,6 +59,7 @@ const BookParcel = () => {
             bookingDate: formattedBookingDate,
             deliveryManId : '',
             approximateDate :'',
+           
         }
         try {
             const parcelRes = await axiosSecure.post('/parcel', menuItem);

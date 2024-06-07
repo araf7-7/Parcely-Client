@@ -5,6 +5,7 @@ import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const AllParcel = () => {
     const axiosSecure = useAxiosSecure();
@@ -87,6 +88,9 @@ const AllParcel = () => {
 
     return (
         <div className="mx-10">
+            <Helmet>
+                    <title>All Parcel</title>
+                </Helmet>
             <div>
                 <h1 className="text-4xl my-10 flex gap-2"><BsBoxFill /> All Parcels </h1>
             </div>

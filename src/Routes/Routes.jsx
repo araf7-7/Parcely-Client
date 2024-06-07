@@ -1,6 +1,5 @@
 import {
-
-    createBrowserRouter
+    createBrowserRouter,
 } from "react-router-dom";
 import Root from "../Root/Root";
 import Home from "../Pages/Home/Home";
@@ -20,88 +19,90 @@ import UpdateUser from "../Dashboard/User/UpdateUser";
 import DeliveryList from "../Dashboard/DeliveryMan/DeliveryList";
 import Reviews from "../Dashboard/DeliveryMan/Reviews";
 import AllDeliveryMan from "../Dashboard/Admin/AllDeliveryMan";
+import Statistic from "../Dashboard/Admin/Statistic";
+import AdminPrivateRoute from "../PrivateRoute/AdminPrivateRoute";
+import DeliveryPrivateRoute from "../PrivateRoute/DeliveryPrivateRoute";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root></Root>,
-        errorElement: <Error></Error>,
+        element: <Root />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home />
             },
             {
                 path: '/login',
-                element: <Login></Login>
+                element: <Login />
             },
             {
                 path: '/register',
-                element: <Register></Register>
+                element: <Register />
             },
             {
                 path: '/updateProfile',
-                element: <UpdateProfile></UpdateProfile>
+                element: <UpdateProfile />
             },
-
         ]
     },
     {
         path: 'dashboard',
-        element: <PrivateRoute>
-            <Dashboard></Dashboard>
-        </PrivateRoute>,
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
         children: [
-            //admin routes
+            // admin routes
             {
                 path: 'allParcel',
-                element: <AllParcel></AllParcel>
+                element: <AdminPrivateRoute><AllParcel /></AdminPrivateRoute>
             },
             {
                 path: 'allUser',
-                element: <AllUser></AllUser>
+                element: <AdminPrivateRoute><AllUser /></AdminPrivateRoute>
             },
             {
                 path: 'allDeliveryMan',
-                element: <AllDeliveryMan/>
+                element: <AdminPrivateRoute><AllDeliveryMan /></AdminPrivateRoute>
             },
             {
                 path: 'statistic',
-                element: <AllUser></AllUser>
+                element: <AdminPrivateRoute><Statistic /></AdminPrivateRoute>
             },
             // user routes
             {
                 path: 'bookParcel',
-                element: <BookParcel></BookParcel>
+                element: <BookParcel />
             },
             {
                 path: 'myParcel',
-                element: <MyParcel></MyParcel>
+                element: <MyParcel />
             },
             {
                 path: 'myProfile',
-                element: <MyProfile></MyProfile>
+                element: <MyProfile />
             },
             {
                 path: 'updateUser',
-                element: <UpdateUser></UpdateUser>
+                element: <UpdateUser />
             },
             {
                 path: 'updateParcel/:id',
-                element: <UpdateParcel></UpdateParcel>,
+                element: <UpdateParcel />,
                 loader: ({ params }) => fetch(`http://localhost:5000/parcel/g/${params.id}`)
             },
-
-            //delivery route
+            // delivery route
             {
-                path: 'deliveryList',
-                element: <DeliveryList></DeliveryList>
+                path: 'myDelivery',
+                element:  <DeliveryPrivateRoute><DeliveryList /></DeliveryPrivateRoute>
             },
             {
                 path: 'reviews',
-                element: <Reviews></Reviews>
+                element: <DeliveryPrivateRoute><Reviews /></DeliveryPrivateRoute>
             }
-
         ]
     }
 ]);
