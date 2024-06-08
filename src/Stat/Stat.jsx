@@ -4,10 +4,8 @@ import useAxiosPublic from './../hooks/useAxiosPublic';
 import { useQuery } from "@tanstack/react-query";
 import CountUp from 'react-countup';
 
-
-
 const Stat = () => {
-    const axiosPublic = useAxiosPublic()
+    const axiosPublic = useAxiosPublic();
     const { data: parcels = [] } = useQuery({
         queryKey: ['parcels'],
         queryFn: async () => {
@@ -22,14 +20,17 @@ const Stat = () => {
             return res.data;
         },
     });
+
+    // Count the delivered parcels
+    const deliveredParcelsCount = parcels.filter(parcel => parcel.status === 'Delivered').length;
+
     return (
         <>
             <div>
                 <h1 className="text-5xl font-abc mb-10 text-center">Our Statistic</h1>
             </div>
-            <div className=" container pl-[400px]">
+            <div className="container pl-[400px]">
                 <div className="stats shadow">
-
                     <div className="stat">
                         <div className="stat-figure">
                             <FaBoxOpen className="text-3xl text-sky-400" />
@@ -43,7 +44,7 @@ const Stat = () => {
                             <FaTruckFast className="text-3xl text-sky-400" />
                         </div>
                         <div className="stat-title">Parcel Delivered</div>
-                        <CountUp className="stat-value" end={''} />
+                        <CountUp className="stat-value" end={deliveredParcelsCount} />
                     </div>
 
                     <div className="stat">
@@ -51,11 +52,11 @@ const Stat = () => {
                             <FaUsers className="text-3xl text-sky-400" />
                         </div>
                         <div className="stat-title">Total User</div>
-                        < CountUp className="stat-value" end={user.length} />
+                        <CountUp className="stat-value" end={user.length} />
                     </div>
-
                 </div>
-            </div></>
+            </div>
+        </>
     );
 };
 

@@ -6,7 +6,6 @@ import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import Error from "../Error/Error";
-import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import Dashboard from "../Dashboard/Dashboard";
 import AllParcel from "../Dashboard/Admin/AllParcel";
@@ -40,10 +39,6 @@ export const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />
-            },
-            {
-                path: '/updateProfile',
-                element: <UpdateProfile />
             },
         ]
     },
