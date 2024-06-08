@@ -55,20 +55,20 @@ const FirebaseProvider = ({ children }) => {
             setUser(currentUser);
             if (currentUser) {
                 saveUser(currentUser)
-                //     const userInfo = { email: currentUser.email }
-                //     axiosPublic.post('/jwt', userInfo)
-                //     .then(res=>{
-                //         if(res.data.token){
-                //             localStorage.setItem('access-token', res.data.token)
-                //         }
-                //     })
-                // }
-                // else{
-                //     localStorage.removeItem('access-token')
-                // }
-                setLoading(false);
+                const userInfo = { email: currentUser.email }
+                axiosPublic.post('/jwt', userInfo)
+                    .then(res => {
+                        if (res.data.token) {
+                            localStorage.setItem('access-token', res.data.token)
+                        }
+                    })
             }
-        });
+            else {
+                localStorage.removeItem('access-token')
+            }
+            setLoading(false);
+        }
+        );
         return () => {
             return unsubscribe();
         }

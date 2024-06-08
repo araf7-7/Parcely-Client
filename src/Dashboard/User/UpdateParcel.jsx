@@ -49,7 +49,7 @@ const UpdateParcel = () => {
             latitude: data.latitude,
             longitude: data.longitude,
             price: data.price,
-
+            status: 'pending'
         }
         try {
             const parcelRes = await axiosSecure.patch(`/parcel/${_id}`, menuItem);
