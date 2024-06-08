@@ -12,7 +12,7 @@ const Cards = ({ user }) => {
     const { name, img } = user || {}
     return (
         <div>
-            <div data-aos='fade-up' className="card w-96 bg-base-100 shadow-xl">
+            <div data-aos='fade-up' className="card w-auto md:w-96 lg:w-96 bg-base-100 shadow-xl">
                 <figure className="px-10 pt-10">
                     <img src={img} alt="Shoes" className="rounded-xl" />
                 </figure>

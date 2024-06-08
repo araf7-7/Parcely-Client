@@ -8,7 +8,7 @@ const FeatureCard = () => {
     return (
         <>
           
-            <div className="grid grid-cols-1 my-[130px] md:grid-cols-2 lg:grid-cols-3 gap-5 container mx-auto items-center justify-center">
+            <div className="grid w-96 ml-5 md:w-auto lg:w-auto  grid-cols-1 my-[130px] md:grid-cols-2 lg:grid-cols-3 gap-5 md:container lg:container md:mx-auto lg:mx-auto items-center justify-center">
                 <div className="shadow-2xl">
                     <div className="flex w-auto h-52 items-center">
                         <div className="px-10 text-sky-400">

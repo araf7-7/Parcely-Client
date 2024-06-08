@@ -29,8 +29,8 @@ const Stat = () => {
             <div>
                 <h1 className="text-5xl font-abc mb-10 text-center">Our Statistic</h1>
             </div>
-            <div className="container pl-[400px]">
-                <div className="stats shadow">
+            <div className="container  mx-auto pl-[90px] md:pl-[100px] lg:pl-[400px]">
+                <div className="stats stats-vertical lg:stats-horizontal     md:stats-horizontal shadow">
                     <div className="stat">
                         <div className="stat-figure">
                             <FaBoxOpen className="text-3xl text-sky-400" />

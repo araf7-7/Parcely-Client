@@ -6,13 +6,15 @@ import UseAuth from '../../hooks/useAuth';
 import { getAuth, updateProfile } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+// import useAxiosPublic from '../../hooks/useAxiosPublic';
 
-
-
+// const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_API
+// const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const UpdateUser = () => {
     const { user, setUser } = UseAuth()
     const navigate = useNavigate()
+    // const axiosPublic = useAxiosPublic()
     const handleUpdate = async (e) => {
         e.preventDefault()
         const form = e.target

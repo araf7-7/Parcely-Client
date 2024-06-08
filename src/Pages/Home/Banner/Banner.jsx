@@ -5,7 +5,7 @@ import { TypeAnimation } from "react-type-animation";
 const Banner = () => {
     return (
         <div className="bg-[#20262b] m-10 rounded-xl  lg:flex">
-            <div className="lg:w-[700px] rounded-lg  items-center justify-center md:flex">
+            <div className="lg:w-[700px] rounded-lg w-auto items-center justify-center md:flex">
                 <Lottie animationData={BannerImg} />
             </div>
             <div className="text-white flex-1 p-10 lg:px-0 font-reddit py-24 ">
@@ -23,7 +23,7 @@ const Banner = () => {
                     style={{ fontSize: '3em' }}
                     repeat={Infinity}
                 />
-                <h2 className="text-2xl my-5 lg:w-auto md:w-auto w-64"><span className="text-sky-400">Track</span>,<span className="text-sky-400">Manage</span>,<span className="text-sky-400">Simplify</span>. <br /> Your one-stop shop for effortless parcel control.
+                <h2 className="text-2xl my-5 lg:w-auto md:w-auto w-56"><span className="text-sky-400">Track</span>,<span className="text-sky-400">Manage</span>,<span className="text-sky-400 w-24">Simplify</span>. <br /> Your one-stop shop for effortless parcel control.
                 </h2>
                 <label className="input mt-2 mr-4 border-2 border-white  bg-transparent flex items-center ">
                     <input type="text" className="grow border-none" placeholder="Search" />
