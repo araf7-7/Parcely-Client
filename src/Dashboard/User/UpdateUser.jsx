@@ -2,7 +2,7 @@
 
 import { Helmet } from 'react-helmet';
 
-import UseAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { getAuth, updateProfile } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 // const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 
 const UpdateUser = () => {
-    const { user, setUser } = UseAuth()
+    const { user, setUser } = useAuth()
     const navigate = useNavigate()
     // const axiosPublic = useAxiosPublic()
     const handleUpdate = async (e) => {

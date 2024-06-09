@@ -21,7 +21,7 @@ const AllDeliveryMan = () => {
     });
     // Calculate the number of delivered parcels for each delivery man
     const deliveredCounts = delivery.map(deliver => {
-        const count = parcels.filter(parcel => parcel.status === 'Delivered' && parcel.deliveryManId === deliver._id).length;
+        const count = parcels?.filter(parcel => parcel.status === 'Delivered' && parcel.deliveryManId === deliver._id).length;
         return { ...deliver, deliveredCount: count };
     });
     return (

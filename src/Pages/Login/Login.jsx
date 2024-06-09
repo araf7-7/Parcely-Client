@@ -1,17 +1,11 @@
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-// import UseAuth from '../hooks/UseAuth';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
-// import { toast } from 'sonner';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
-import UseAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
-// import { toast } from 'sonner';
-// import UseAuth from './UseAuth';
 
-// import { FaEye } from "react-icons/fa";
-// import { IoEyeOffSharp } from "react-icons/io5";
 
 const Login = () => {
 
@@ -20,7 +14,7 @@ const Login = () => {
         setOpen(!open)
     }
     
-    const { signIn, user } = UseAuth()
+    const { signIn, user } = useAuth()
     const {
         register, handleSubmit, formState: { errors },
     } = useForm()
@@ -44,7 +38,7 @@ const Login = () => {
             })
             .catch(() => toast.error("Please Check Your Email Or Password"))
     }
-    const { googleLogin} = UseAuth()
+    const { googleLogin} = useAuth()
     const location = useLocation()
     const from = location?.state || "/"
     const handleSocialLogin = socialProvider => {

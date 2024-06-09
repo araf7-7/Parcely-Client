@@ -48,7 +48,7 @@ const AllUser = () => {
     };
 
     const getParcelCountByUser = (email) => {
-        return parcels.filter(parcel => parcel.email === email).length;
+        return parcels?.filter(parcel => parcel.email === email).length;
     };
     // Pagination logic
     const indexOfLastUser = currentPage * usersPerPage;

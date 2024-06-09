@@ -21,8 +21,9 @@ const Stat = () => {
         },
     });
 
+    
     // Count the delivered parcels
-    const deliveredParcelsCount = parcels.filter(parcel => parcel.status === 'Delivered').length;
+    const deliveredParcelsCount = parcels?.filter(parcel => parcel.status === 'Delivered').length;
 
     return (
         <>

@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
-import UseAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import Lottie from 'lottie-react';
 import RegImg from './register.json'
@@ -18,8 +18,8 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Register = () => {
     const axiosPublic = useAxiosPublic()
-    const { googleLogin } = UseAuth()
-    const { createUser, user, updateUserProfile, saveUser } = UseAuth();
+    const { googleLogin } = useAuth()
+    const { createUser, user, updateUserProfile, saveUser } = useAuth();
     const navigate = useNavigate()
     useEffect(() => {
         if (user?.photoURL) navigate("/")

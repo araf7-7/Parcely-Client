@@ -4,7 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from './../../hooks/useAuth';
 
 
-const MyDeliveryList = () => {
+const DeliveryList = () => {
     const axiosSecure = useAxiosSecure();
     const { user } = useAuth(); // Assuming you have a context that provides the logged-in user's info
 
@@ -66,16 +66,16 @@ const MyDeliveryList = () => {
                 <tbody>
                     {parcels.map((parcel, index) => (
                         <tr className="hover:bg-gray-50 transition duration-300" key={index}>
-                            <td className="py-4 px-2 border-b">{parcel.name}</td>
-                            <td className="py-4 px-2 border-b">{parcel.receiverName}</td>
-                            <td className="py-4 px-2 border-b">{parcel.phoneNumber}</td>
-                            <td className="py-4 px-2 border-b">{parcel.deliveryDate}</td>
-                            <td className="py-4 px-2 border-b">{parcel.approximateDate}</td>
-                            <td className="py-4 px-2 border-b">{parcel.receiverPhoneNumber}</td>
-                            <td className="py-4 px-2 border-b">{parcel.deliveryAddress}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.name}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.receiverName}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.phoneNumber}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.deliveryDate}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.approximateDate}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.receiverPhoneNumber}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.deliveryAddress}</td>
                             <td className="py-4 px-2 border-b">
                                 <a
-                                    href={parcel.location}
+                                    href={parcel?.location}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn btn-sm bg-sky-400 text-white"
@@ -85,9 +85,9 @@ const MyDeliveryList = () => {
                             </td>
                             <td className="py-4 px-2 border-b">
                                 <button 
-                                    onClick={() => handleUpdateStatus(parcel._id, 'Cancelled')} 
+                                    onClick={() => handleUpdateStatus(parcel?._id, 'Cancelled')} 
                                     className="btn btn-sm bg-sky-400 text-white"
-                                    disabled={parcel.status === 'Cancelled' || parcel.status === 'Delivered'}
+                                    disabled={parcel?.status === 'Cancelled' || parcel.status === 'Delivered'}
                                 >
                                     Cancel
                                 </button>
@@ -109,4 +109,4 @@ const MyDeliveryList = () => {
     );
 };
 
-export default MyDeliveryList;
+export default DeliveryList;

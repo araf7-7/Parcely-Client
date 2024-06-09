@@ -8,7 +8,7 @@ const DeliveryItem = () => {
                 <MenuItem label='My Delivery List' address='/dashboard/myDelivery' icon={FaTruckArrowRight}></MenuItem>
             </li>
             <li className="">
-                <MenuItem label='My Review' address='/dashboard/deliveryReviews' icon={MdOutlineReviews}></MenuItem>
+                <MenuItem label='My Review' address='/dashboard/reviews' icon={MdOutlineReviews}></MenuItem>
             </li>
         </div>
     );

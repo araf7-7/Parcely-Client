@@ -3,9 +3,9 @@ import { AuthContext } from "../FirebaseProvider/FirebaseProvider";
 // import { AuthContext } from "./FirebaseProvider/FirebaseProvider";
 
 
-const UseAuth = () => {
+const useAuth = () => {
     const all = useContext(AuthContext)
     return all
 };
 
-export default UseAuth;
+export default useAuth;

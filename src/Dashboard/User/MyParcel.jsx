@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import UseAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import { MdPayment } from "react-icons/md";
 
 const MyParcel = () => {
     const axiosSecure = useAxiosSecure();
-    const { user } = UseAuth();
+    const { user } = useAuth();
     const { data: parcel = [], refetch } = useQuery({
         queryKey: ['parcels'],
         queryFn: async () => {
@@ -106,11 +106,21 @@ const MyParcel = () => {
                                             </Link>
                                         </td>
                                         <td>
-                                            <button className="btn ml-2 bg-yellow-400"><FiStar/></button>
+                                            <button
+                                                disabled={['Cancelled', 'pending', 'On The Way'].includes(parcel.status)}
+                                                className="btn ml-2 bg-yellow-400"><FiStar /></button>
                                         </td>
                                         <td>
-                                            <button className="btn ml-2 bg-orange-500"><MdPayment /></button>
+                                            <Link to={`/dashboard/payment/${parcel._id}`}>
+                                                <button
+                                                    disabled={['Cancelled', 'pending', 'On The Way'].includes(parcel.status)}
+                                                    className="btn ml-2 bg-orange-500"
+                                                >
+                                                    <MdPayment />
+                                                </button>
+                                            </Link>
                                         </td>
+
                                     </tr>
                                 ))}
                             </tbody>

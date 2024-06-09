@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import UseAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 
 
@@ -11,7 +11,7 @@ import UseAuth from "../../hooks/useAuth";
 const UpdateParcel = () => {
     const { phoneNumber, parcelType, _id, Weight, receiverName, receiverNo, address, latitude, longitude, price } = useLoaderData()
 
-    const { user } = UseAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
     const { register, handleSubmit, watch, setValue,  } = useForm();
 

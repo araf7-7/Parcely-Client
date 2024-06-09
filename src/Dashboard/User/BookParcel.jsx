@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import UseAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState, useEffect } from "react";
@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 
 const BookParcel = () => {
-    const { user } = UseAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
     const { register, handleSubmit, watch, setValue, reset } = useForm();
     const [startDate, setStartDate] = useState(new Date());

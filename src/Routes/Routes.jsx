@@ -21,6 +21,8 @@ import AllDeliveryMan from "../Dashboard/Admin/AllDeliveryMan";
 import Statistic from "../Dashboard/Admin/Statistic";
 import AdminPrivateRoute from "../PrivateRoute/AdminPrivateRoute";
 import DeliveryPrivateRoute from "../PrivateRoute/DeliveryPrivateRoute";
+import Payment from "../Dashboard/User/Payment";
+import PaymentSuccess from "../Dashboard/User/PaymentSuccess";
 
 export const router = createBrowserRouter([
     {
@@ -83,6 +85,14 @@ export const router = createBrowserRouter([
             {
                 path: 'updateUser',
                 element: <UpdateUser />
+            },
+            {
+                path: `payment/:id`,
+                element: <Payment></Payment>,
+            },
+            {
+                path: `payment-success`,
+                element:<PaymentSuccess></PaymentSuccess>
             },
             {
                 path: 'updateParcel/:id',

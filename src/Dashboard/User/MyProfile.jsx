@@ -1,12 +1,12 @@
 import { Helmet } from "react-helmet";
-import UseAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 
 
 const MyProfile = () => {
-    const { user } = UseAuth()
+    const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     console.log(user);
     const { data: User = [], } = useQuery({
