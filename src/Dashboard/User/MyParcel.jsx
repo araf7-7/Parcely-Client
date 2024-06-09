@@ -105,11 +105,16 @@ const MyParcel = () => {
                                                 </button>
                                             </Link>
                                         </td>
+
                                         <td>
-                                            <button
-                                                disabled={['Cancelled', 'pending', 'On The Way'].includes(parcel.status)}
-                                                className="btn ml-2 bg-yellow-400"><FiStar /></button>
+                                            <Link to={`/dashboard/reviews/${parcel._id}`}>
+                                                <button
+                                                    disabled={['Cancelled', 'pending', 'On The Way'].includes(parcel.status)}
+                                                    className="btn ml-2 bg-yellow-400"><FiStar />
+                                                </button>
+                                            </Link>
                                         </td>
+
                                         <td>
                                             <Link to={`/dashboard/payment/${parcel._id}`}>
                                                 <button

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from './../../hooks/useAuth';
+import { Helmet } from "react-helmet";
 
 
 const DeliveryList = () => {
@@ -43,12 +44,15 @@ const DeliveryList = () => {
     };
 
     return (
-        <div className="lg:m-5 m-auto">
+        <div className="lg:m-5 m-auto overflow-x-auto">
+             <Helmet>
+                <title>Deliveries</title>
+            </Helmet>
             <div className="flex justify-between">
                 <h1 className="lg:text-3xl text-xl">My Delivery List</h1>
                 <h1 className="lg:text-3xl text-xl">Total Parcels: {parcels.length}</h1>
             </div>
-            <table className=" shadow-md border mx-auto border-gray-100 my-6">
+            <table className=" shadow-md w-auto border mx-auto border-gray-100 my-6">
                 <thead>
                     <tr className="bg-sky-300">
                         <th className="py-3 px-2 text-left border-b">Booked User’s Name</th>
@@ -58,7 +62,6 @@ const DeliveryList = () => {
                         <th className="py-3 px-2 text-left border-b">Approximate Delivery Date</th>
                         <th className="py-3 px-2 text-left border-b">Receivers Phone Number</th>
                         <th className="py-3 px-2 text-left border-b">Receivers Address</th>
-                        <th className="py-3 px-2 text-left border-b">View Location</th>
                         <th className="py-3 px-2 text-left border-b">Cancel</th>
                         <th className="py-3 px-2 text-left border-b">Deliver</th>
                     </tr>
@@ -71,18 +74,8 @@ const DeliveryList = () => {
                             <td className="py-4 px-2 border-b">{parcel?.phoneNumber}</td>
                             <td className="py-4 px-2 border-b">{parcel?.deliveryDate}</td>
                             <td className="py-4 px-2 border-b">{parcel?.approximateDate}</td>
-                            <td className="py-4 px-2 border-b">{parcel?.receiverPhoneNumber}</td>
-                            <td className="py-4 px-2 border-b">{parcel?.deliveryAddress}</td>
-                            <td className="py-4 px-2 border-b">
-                                <a
-                                    href={parcel?.location}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn btn-sm bg-sky-400 text-white"
-                                >
-                                    Location
-                                </a>
-                            </td>
+                            <td className="py-4 px-2 border-b">{parcel?.receiverNo}</td>
+                            <td className="py-4 px-2 border-b">{parcel?.address}</td>
                             <td className="py-4 px-2 border-b">
                                 <button 
                                     onClick={() => handleUpdateStatus(parcel?._id, 'Cancelled')} 

@@ -3,6 +3,7 @@ import ApexCharts from 'react-apexcharts';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { IoStatsChartOutline } from 'react-icons/io5';
+import { Helmet } from 'react-helmet';
 
 const Statistic = () => {
     // const [bookingData, setBookingData] = useState([]);
@@ -55,6 +56,9 @@ const Statistic = () => {
 
     return (
         <div className='m-2'>
+             <Helmet>
+                <title>Statistic</title>
+            </Helmet>
             <h1 className='text-4xl ml-4 my-10 flex gap-2'> <IoStatsChartOutline />Admin Dashboard</h1>
             <ApexCharts
                 options={chartData.options}

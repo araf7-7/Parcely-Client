@@ -6,6 +6,7 @@ import useRole from "../hooks/useRole";
 import AdminMenu from "./MenuItem/AdminMenu";
 import UserMenu from "./MenuItem/UserMenu";
 import DeliveryItem from "./MenuItem/DeliveryItem";
+import { Helmet } from "react-helmet";
 
 const Dashboard = () => {
     const [role] = useRole()
@@ -13,6 +14,10 @@ const Dashboard = () => {
 
     return (
         <div className="lg:flex grid grid-cols-1 ">
+
+            <Helmet>
+                <title>Dashboard</title>
+            </Helmet>
             <div className="lg:w-[356px] w-full min-h-screen bg-sky-200">
                 <ul className="menu p-4 text-lg font-abc text-black">
                     {role === 'Admin' && <AdminMenu></AdminMenu>}

@@ -16,13 +16,14 @@ import UpdateParcel from "../Dashboard/User/UpdateParcel";
 import MyProfile from "../Dashboard/User/MyProfile";
 import UpdateUser from "../Dashboard/User/UpdateUser";
 import DeliveryList from "../Dashboard/DeliveryMan/DeliveryList";
-import Reviews from "../Dashboard/DeliveryMan/Reviews";
 import AllDeliveryMan from "../Dashboard/Admin/AllDeliveryMan";
 import Statistic from "../Dashboard/Admin/Statistic";
 import AdminPrivateRoute from "../PrivateRoute/AdminPrivateRoute";
 import DeliveryPrivateRoute from "../PrivateRoute/DeliveryPrivateRoute";
 import Payment from "../Dashboard/User/Payment";
 import PaymentSuccess from "../Dashboard/User/PaymentSuccess";
+import MyReviews from "../Dashboard/DeliveryMan/MyReviews";
+import ReviewModal from "../Dashboard/DeliveryMan/ReviewModal";
 
 export const router = createBrowserRouter([
     {
@@ -92,7 +93,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: `payment-success`,
-                element:<PaymentSuccess></PaymentSuccess>
+                element: <PaymentSuccess></PaymentSuccess>
             },
             {
                 path: 'updateParcel/:id',
@@ -102,12 +103,17 @@ export const router = createBrowserRouter([
             // delivery route
             {
                 path: 'myDelivery',
-                element:  <DeliveryPrivateRoute><DeliveryList /></DeliveryPrivateRoute>
+                element: <DeliveryPrivateRoute><DeliveryList /></DeliveryPrivateRoute>
             },
             {
                 path: 'reviews',
-                element: <DeliveryPrivateRoute><Reviews /></DeliveryPrivateRoute>
-            }
+                element: <DeliveryPrivateRoute><MyReviews></MyReviews></DeliveryPrivateRoute>
+            },
+            {
+                path: "reviews/:id",
+                element: <ReviewModal></ReviewModal>,
+                loader: ({ params }) => fetch(`http://localhost:5000/parcel/g/${params.id}`)
+            },
         ]
     }
 ]);

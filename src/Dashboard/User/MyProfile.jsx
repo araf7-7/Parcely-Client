@@ -18,11 +18,11 @@ const MyProfile = () => {
     })
     console.log(User);
     return (
-        <div className='flex justify-center items-center h-screen'>
+        <div className='flex justify-center items-center '>
             <Helmet>
                 <title>Profile</title>
             </Helmet>
-            <div className='bg-white shadow-lg rounded-2xl w-3/5'>
+            <div className='bg-white shadow-lg rounded-2xl mt-5 w-auto lg:w-3/5'>
                 <img
                     alt='profile'
                     src='https://i.ibb.co/rkjKsJT/abstract-sky-blue-paper-texture-backgrounds-with-dark-blue-fibers-available-for-text-and-quotes-suit.jpg'
