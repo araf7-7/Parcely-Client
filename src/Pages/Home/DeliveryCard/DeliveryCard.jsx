@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Cards from "./Cards";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const DeliveryCard = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
 
     const { data: users = [] } = useQuery({
         queryKey: ['usersDelivery'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/users/u/delivery`);
+            const { data } = await axiosPublic.get(`/users/u/delivery`);
             return data;
         },
     });

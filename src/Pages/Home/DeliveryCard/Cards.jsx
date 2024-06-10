@@ -28,7 +28,9 @@ const Cards = ({ user }) => {
         },
     });
 
-    const deliveredCount = parcels.filter(parcel => parcel.status === 'Delivered' && parcel.deliveryMenId === user._id).length;
+    const deliveredCount = parcels.filter(parcel => parcel.status === 'Delivered' && parcel.deliveryManId === user._id).length;
+    console.log(parcels);
+    console.log(deliveredCount);
     
     // Calculate average rating
     const deliveryManReviews = reviews.filter(review => review.deliveryMenId === user._id);

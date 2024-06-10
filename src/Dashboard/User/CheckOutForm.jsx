@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const CheckOutForm = () => {
     const [error, setError] = useState('')
@@ -82,7 +83,15 @@ const CheckOutForm = () => {
             if (paymentIntent.status === 'succeeded') {
                 console.log('transition id', paymentIntent.id);
                 setTransactionId(paymentIntent.id)
-                navigate('/dashboard/payment-success')
+                await axiosSecure.delete(`/parcel/${id}`)
+                    .then(() => {
+                        toast.success('Parcel deleted successfully');
+                        navigate('/dashboard/payment-success');
+                    })
+                    .catch(deleteError => {
+                        console.log('Error deleting parcel', deleteError);
+                        setError('Error deleting parcel after payment. Please contact support.');
+                    });
             }
         }
     }
