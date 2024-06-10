@@ -98,7 +98,7 @@ export const router = createBrowserRouter([
             {
                 path: 'updateParcel/:id',
                 element: <UpdateParcel />,
-                loader: ({ params }) => fetch(`http://localhost:5000/parcel/g/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-12-server-ochre-eta.vercel.app/parcel/g/${params.id}`)
             },
             // delivery route
             {
@@ -112,7 +112,7 @@ export const router = createBrowserRouter([
             {
                 path: "reviews/:id",
                 element: <ReviewModal></ReviewModal>,
-                loader: ({ params }) => fetch(`http://localhost:5000/parcel/g/${params.id}`)
+                loader: ({ params }) => fetch(`https://assignment-12-server-ochre-eta.vercel.app/parcel/g/${params.id}`)
             },
         ]
     }

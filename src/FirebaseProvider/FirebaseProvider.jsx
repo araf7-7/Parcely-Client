@@ -47,7 +47,7 @@ const FirebaseProvider = ({ children }) => {
             phoneNumber: user?.phoneNumber,
             role: 'User',
         };
-        const { data } = await axios.put(`http://localhost:5000/users`, currentUser); // Corrected URL
+        const { data } = await axios.put(`https://assignment-12-server-ochre-eta.vercel.app/users`, currentUser); // Corrected URL
         return data;
     }
     useEffect(() => {

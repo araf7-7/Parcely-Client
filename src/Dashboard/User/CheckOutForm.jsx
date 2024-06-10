@@ -85,7 +85,7 @@ const CheckOutForm = () => {
                 setTransactionId(paymentIntent.id)
                 await axiosSecure.delete(`/parcel/${id}`)
                     .then(() => {
-                        toast.success('Parcel deleted successfully');
+                        toast.success('Payed successfully');
                         navigate('/dashboard/payment-success');
                     })
                     .catch(deleteError => {

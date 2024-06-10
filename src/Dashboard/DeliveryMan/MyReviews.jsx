@@ -24,8 +24,11 @@ const MyReviews = () => {
                 <title>My Reviews</title>
             </Helmet>
         </div>
-        <div className="container font-reddit mx-auto p-4">
-                <h1 className="text-2xl font-bold mb-4">My Reviews</h1>
+            <div>
+                <h1 className="text-center mt-5 font-abc text-4xl">My Reviews</h1>
+            </div>
+            <div className="container font-reddit mx-auto p-4">
+               
                 {reviews.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {reviews.map((review) => (

@@ -42,7 +42,7 @@ const ReviewModal = () => {
 
         console.log(givingReview);
         // Send data to the server
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://assignment-12-server-ochre-eta.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -65,9 +65,12 @@ const ReviewModal = () => {
             <Helmet>
                 <title>Giving Review</title>
             </Helmet>
+            <div>
+                <h1 className="text-center mt-5 font-abc text-4xl mb-10" >Review A Delivery Man</h1>
+            </div>
             <form
                 onSubmit={handleSubmit}
-                className="max-w-lg mx-auto p-4 shadow-md rounded-lg bg-white">
+                className="max-w-lg mx-auto p-4 shadow-md rounded-lg bg-sky-200">
                 <div className="flex  gap-5">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2">Name</label>
@@ -124,7 +127,7 @@ const ReviewModal = () => {
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-blue-300 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Submit
                     </button>
                 </div>

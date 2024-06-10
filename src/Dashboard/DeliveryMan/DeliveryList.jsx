@@ -20,12 +20,12 @@ const DeliveryList = () => {
     const handleUpdateStatus = (id, status) => {
         Swal.fire({
             title: "Are you sure?",
-            text: `You are about to mark this parcel as ${status}.`,
+            text: `You are about to deliver this parcel.`,
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: `Yes, mark as ${status}`
+            confirmButtonText: `Yes`
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosSecure.patch(`/parcel/gone/${id}`, { status })
@@ -33,8 +33,8 @@ const DeliveryList = () => {
                         if (res.data.modifiedCount > 0) {
                             refetch();
                             Swal.fire({
-                                title: "Updated!",
-                                text: `Parcel status has been updated to ${status}.`,
+                                title: "Success",
+                                text: `Parcel has been  ${status}.`,
                                 icon: "success"
                             });
                         }

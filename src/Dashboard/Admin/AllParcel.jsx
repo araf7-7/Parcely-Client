@@ -59,7 +59,7 @@ const AllParcel = () => {
         }
 
         try {
-            const res = await fetch(`http://localhost:5000/parcel/u/${selectedParcelId}`, {
+            const res = await fetch(`https://assignment-12-server-ochre-eta.vercel.app/parcel/u/${selectedParcelId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -89,8 +89,8 @@ const AllParcel = () => {
     return (
         <div className="mx-10">
             <Helmet>
-                    <title>All Parcel</title>
-                </Helmet>
+                <title>All Parcel</title>
+            </Helmet>
             <div>
                 <h1 className="text-4xl my-10 flex gap-2"><BsBoxFill /> All Parcels </h1>
             </div>
